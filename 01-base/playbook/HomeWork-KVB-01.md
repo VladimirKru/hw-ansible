@@ -229,6 +229,72 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
     ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
    ```
 4. Добавьте новую группу хостов fedora, самостоятельно придумайте для неё переменную. В качестве образа можно использовать этот вариант.
-   
-5. Напишите скрипт на bash: автоматизируйте поднятие необходимых контейнеров, запуск ansible-playbook и остановку контейнеров.
-6. Все изменения должны быть зафиксированы и отправлены в ваш личный репозиторий.
+   * загрузка образа
+        ```markdown
+        cio@hp-lx:~/devops-2023/git/hw-ansible/01-base/playbook$ docker run -d -t --name fedora pycontribs/fedora
+        Unable to find image 'pycontribs/fedora:latest' locally
+        latest: Pulling from pycontribs/fedora
+        588cf1704268: Pull complete 
+        49425a0e12c7: Pull complete 
+        Digest: sha256:20eeb45ef6e394947058dc24dc2bd98dfb7a8fecbbe6363d14ab3170f10a27ab
+        Status: Downloaded newer image for pycontribs/fedora:latest
+        4e17b34251a5dabde5c56e33c1c175a278e0c2049e1b735dde31b990c2045406
+        cio@hp-lx:~/devops-2023/git/hw-ansible/01-base/playbook$ docker ps
+        CONTAINER ID   IMAGE                      COMMAND           CREATED         STATUS         PORTS     NAMES
+        4e17b34251a5   pycontribs/fedora          "/bin/bash"       3 seconds ago   Up 2 seconds             fedora
+        2d08d57b4073   pycontribs/ubuntu:latest   "sleep 6000000"   11 hours ago    Up 9 minutes             ubuntu
+        047344bbf839   pycontribs/centos:7        "sleep 6000000"   11 hours ago    Up 9 minutes             centos7
+        ```
+    * Добавляем новую группу хостов:
+    ![Alt text](img10.png)  
+    * добавляем файл с переменной:
+    ![Alt text](img11.png)
+    * Итог работы playbook:
+    ```markdown
+    cio@hp-lx:~/devops-2023/git/hw-ansible/01-base/playbook$ ansible-playbook site.yml -i inventory/prod.yml --ask-vault-password
+    Vault password: 
+    [WARNING]: Found both group and host with same name: fedora
+
+    PLAY [Print os facts] ********************************************************************************************************************************************************
+
+    TASK [Gathering Facts] *******************************************************************************************************************************************************
+    ok: [localhost]
+    ok: [fedora]
+    ok: [ubuntu]
+    ok: [centos7]
+
+    TASK [Print OS] **************************************************************************************************************************************************************
+    ok: [centos7] => {
+        "msg": "CentOS"
+    }
+    ok: [ubuntu] => {
+        "msg": "Ubuntu"
+    }
+    ok: [localhost] => {
+        "msg": "Ubuntu"
+    }
+    ok: [fedora] => {
+        "msg": "Fedora"
+    }
+
+    TASK [Print fact] ************************************************************************************************************************************************************
+    ok: [centos7] => {
+        "msg": "el default fact"
+    }
+    ok: [ubuntu] => {
+        "msg": "deb default fact"
+    }
+    ok: [fedora] => {
+        "msg": "fed default fact"
+    }
+    ok: [localhost] => {
+        "msg": "PaSSw0rd"
+    }
+
+    PLAY RECAP *******************************************************************************************************************************************************************
+    centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    fedora                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+    ```
+
