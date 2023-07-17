@@ -246,11 +246,13 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
         047344bbf839   pycontribs/centos:7        "sleep 6000000"   11 hours ago    Up 9 minutes             centos7
         ```
     * Добавляем новую группу хостов:
+  
     ![Alt text](img10.png)
 
-    * добавляем файл с переменной:
+    * Добавляем файл с переменной:
+  
     ![Alt text](img11.png)
-    
+
     * Итог работы playbook:
     ```markdown
     cio@hp-lx:~/devops-2023/git/hw-ansible/01-base/playbook$ ansible-playbook site.yml -i inventory/prod.yml --ask-vault-password
