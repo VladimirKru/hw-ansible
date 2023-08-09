@@ -185,25 +185,55 @@ an AnsibleCollectionFinder has not been installed in this process
 
 Группа хостов: 
 Clickhouse
-Состоит из 1 Hendler и 4 Tasks
+Состоит из 1 Hendler:
+
+- name: Start clickhouse service
+
+И 4 Tasks:
+
+- name: Get clickhouse distrib
+- name: Install clickhouse packages
+- name: Flush handllush_handleers
+- name: Create database
 
 В начале перезагужается сервер после его установки
+name: clickhouse-server
 
+state: restarted
 #### Таски:
+#### name: Get clickhouse distrib
+* Скачивает пакеты с сайта url: "https://packages.clickhouse.com/deb/pool/main/c/
 
-* Скачивает пакеты с сайта https://packages.clickhouse.com. Переменные (версия и тип дистрибутива) задаются в group_vars/clickhouse. Предусмотрен rescue сценарий для скачивания дистрибутива с альтернативного источника
+Предусмотрен rescue сценарий для скачивания дистрибутива с альтернативного источника
 
+#### name: Install clickhouse packages
 * Устанавливает скаченные пакеты
+
+Переменные задаются в group_vars/clickhouse:
+  - версия дистрибутива clickhouse_version
+  - clickhouse_packages - список пакетов clickhouse
+  - тип пакета (clickhouse-client, clickhouse-server, clickhouse-common-static) 
+  
+#### name: Flush handllush_handleers
 
 * Запускает хендлер для перезапуска сервиса после установки
 
-* Создание БД "logs". Определяет статусы: failed код возврата не 0 и changes если 0.
+#### name: Create database
+* Создание БД "logs"( ansible.builtin.command: "clickhouse-client -q 'create database logs;'")
+* Определяет статусы: failed код возврата не 0 и changes если 0.
 
 ### Vector.
 Группа хостов: vector
 
-Состоит из 1 хендлера и 1 таски.
+Состоит из 1 хендлера:
+- name: Restart Vector
 
-Хендлер нужен для перезапуска сервис.
+и 1 таски:
+- name: Get Vector Package
 
-Таска - устанавливает пакет, скачивая его с нужного ресурса по http. Переменная для указания версии определеяется в group_vars/vector.
+#### name: Restart Vector
+Перезапускает сервис
+
+#### name: Get Vector Package
+- устанавливает пакет, скачивая его с нужного ресурса по http. 
+- Переменная для указания версии определяется в group_vars/vector (vector_version: "0.30.0")
