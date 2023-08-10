@@ -44,7 +44,8 @@
 
              - name: Flush handllush_handleers
                meta: flush_handlers
-![Alt text](playbook/img1.png)  
+![Alt text](playbook/img1.png)
+
 4. Подготовьте свой inventory-файл `prod.yml`.
    
     all:
@@ -72,6 +73,7 @@
 5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.
 
 ![Alt text](playbook/img2.png)
+
 6. Попробуйте запустить playbook на этом окружении с флагом `--check`.
    
     cio@hp-lx:~/devops-2023/git/hw-ansible/03-yc/playbook$ ansible-playbook -i inventory/prod.yml playbook.yml --check
