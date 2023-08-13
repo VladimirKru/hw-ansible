@@ -29,9 +29,7 @@
           vector_version: "0.30.0"
     ```
 5. Перенести нужные шаблоны конфигов в `templates`.
-6. Опишите в `README.md` обе роли и их параметры:
-   * [lighthouse-role](https://github.com/VladimirKru/hw-ansible/tree/main/lighthouse-role)
-   * [vector-role](https://github.com/VladimirKru/hw-ansible/tree/main/vector-role)
+6. Опишите в `README.md` обе роли и их параметры.
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
 8. Добавьте roles в `requirements.yml` в playbook.
   
@@ -52,6 +50,6 @@
 11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook:
     1.  [lighthouse-role](https://github.com/VladimirKru/lighthouse-role.git)
     2.  [vector-role](https://github.com/VladimirKru/vector-role.git)
-    3.  [playbook](https://github.com/VladimirKru/hw-ansible/tree/main/04-roles)
+    3.  [playbook](https://github.com/VladimirKru/hw-ansible/tree/main/04-roles/playbook)
     
 
