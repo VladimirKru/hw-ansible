@@ -26,7 +26,7 @@
 - name: Install Clickhouse
   hosts: clickhouse
   roles:
-    - role: clickhouse-role
+    - role: clickhouse
       become: true
       clickhouse_version: "22.4.6.53"
 
@@ -40,4 +40,3 @@
   hosts: lighthouse
   roles:
     - role: lighthouse-role
-      become: true

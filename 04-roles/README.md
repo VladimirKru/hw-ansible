@@ -33,8 +33,25 @@
    * [lighthouse-role](https://github.com/VladimirKru/hw-ansible/tree/main/lighthouse-role)
    * [vector-role](https://github.com/VladimirKru/hw-ansible/tree/main/vector-role)
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
-8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
+8. Добавьте roles в `requirements.yml` в playbook.
+  
+    ```markdown
+      - src: git@github.com:VladimirKru/lighthouse-role.git
+        scm: git
+        version: "0.30.0"
+        name: vector
+
+      - src: git@github.com:VladimirKru/lighthouse-role.git
+        scm: git
+        version: latest
+        name: lighthouse
+    ```
+
 9.  Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
 10.  Выложите playbook в репозиторий.
-11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
+11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook:
+    1.  [lighthouse-role](https://github.com/VladimirKru/hw-ansible/tree/main/lighthouse-role)
+    2.  [vector-role](https://github.com/VladimirKru/hw-ansible/tree/main/vector-role)
+    3.  [playbook](https://github.com/VladimirKru/hw-ansible/tree/main/04-roles)
+    
 
