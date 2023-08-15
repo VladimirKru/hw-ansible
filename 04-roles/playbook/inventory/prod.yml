@@ -4,7 +4,7 @@ all:
     clickhouse:
       hosts:
         server.clickhouse.vagrant:
-          ansible_host: 192.168.56.12
+          ansible_host: 192.168.56.11
           ansible_connection: ssh
           ansible_user: vagrant
     lighthouse:
@@ -16,6 +16,6 @@ all:
     vector:
       hosts:
         server.vector.vagrant:
-          ansible_host: 192.168.56.11
+          ansible_host: 192.168.56.12
           ansible_connection: ssh
           ansible_user: vagrant

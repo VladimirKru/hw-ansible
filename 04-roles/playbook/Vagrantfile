@@ -12,7 +12,7 @@ INVENTORY_PATH = "./inventory"
 
 servers = [
 	{
-	:hostname => HOST_PREFIX + "vector" + DOMAIN,
+	:hostname => HOST_PREFIX + "clickhouse" + DOMAIN,
 	:ip => NET + "11",
 	:ssh_host => "20011",
 	:ssh_vm => "22",
@@ -21,7 +21,7 @@ servers = [
 	:disk_size => "10GB",
 	},
   	{
-	:hostname => HOST_PREFIX + "clickhouse" + DOMAIN,
+	:hostname => HOST_PREFIX + "vector" + DOMAIN,
 	:ip => NET + "12",
 	:ssh_host => "20012",
 	:ssh_vm => "22",
