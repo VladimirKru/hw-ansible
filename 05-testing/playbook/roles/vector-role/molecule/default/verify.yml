@@ -1,0 +1,28 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Get service status
+      ansible.builtin.systemd:
+        name: "vector"
+      register: vector
+    - name: Check service status
+      ansible.builtin.assert:
+        that:
+          - "vector.status.ActiveState == 'active'"
+
+    - name: Get config validation status
+      ansible.builtin.command: "vector validate"
+      register: validation_result
+    - name: Print validation info
+      debug:
+        var: validation_result.stdout_lines
+    - name: Check service status
+      ansible.builtin.assert:
+        that:
+          - "validation_result.stdout_lines[4] == '                           Validated'"
+

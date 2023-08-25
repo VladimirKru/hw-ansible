@@ -1,0 +1,8 @@
+---
+- name: Get Vector Package deb
+  become: true
+  ansible.builtin.apt:
+    deb: https://packages.timber.io/vector/{{ vector_version }}/vector_{{ vector_version }}-1_amd64.deb
+    state: present
+  notify: Restart Vector
+  when: ansible_os_family == 'Debian'
