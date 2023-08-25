@@ -1,0 +1,5 @@
+---
+all_clickhouse_table: "logs_table"
+all_clickhouse_db: "logs"
+# when vagrant local VM:
+all_clickhouse_url: "http://192.168.56.11:8123"

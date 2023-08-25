@@ -1,0 +1,9 @@
+# Local directories and files
+.git
+*.box
+.pub
+private_key
+.vagrant
+id_*
+.idea/
+.cache/
